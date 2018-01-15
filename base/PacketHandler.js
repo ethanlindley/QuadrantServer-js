@@ -1,11 +1,11 @@
 let PacketTypes = require('../util/PacketTypes');
 
-class PacketHandler extends PacketTypes
+class PacketHandler
 {
 
-    constructor(socket)
+    constructor()
     {
-        super(socket);
+        this.PacketTypes = new PacketTypes();
     }
 
     handleReceivedPacket(packet)
@@ -29,11 +29,11 @@ class PacketHandler extends PacketTypes
     {
         switch (packet)
         {
-            case this.policy_file_req:
-                this.sendPacket(this.policy_file_res);
+            case this.PacketTypes.policy_file_req:
+                this.sendPacket(this.PacketTypes.policy_file_res);
                 break;
 
-            case this.api_verchk:
+            case this.PacketTypes.api_verchk:
                 let x = this.checkVersion(packet);
                 this.sendPacket(x);
                 break;

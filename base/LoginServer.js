@@ -1,11 +1,11 @@
 let net = require('net');
 let PacketHandler = require('./PacketHandler');
 
-class LoginServer extends PacketHandler
+class LoginServer
 {
     constructor(port)
     {
-        super(port);
+        this.PacketHandler = new PacketHandler();
 
         this.port = port;
     }
@@ -28,7 +28,7 @@ class LoginServer extends PacketHandler
     {
         console.log('INFO: new connection from ' + socket.remoteAddress);
 
-        socket.on('data', this.handleReceivedPacket.bind(socket));
+        socket.on('data', this.PacketHandler.handleReceivedPacket.bind(socket));
     }
 
 }

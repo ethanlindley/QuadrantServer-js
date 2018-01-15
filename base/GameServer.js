@@ -1,11 +1,11 @@
 let net = require('net');
 let PacketHandler = require('./PacketHandler');
 
-class GameServer extends PacketHandler
+class GameServer
 {
     constructor(port)
     {
-        super(port);
+        this.PacketHandler = new PacketHandler();
 
         this.port = port;
     }
@@ -28,7 +28,7 @@ class GameServer extends PacketHandler
     {
         console.log('INFO: new connection from ' + socket.remoteAddress);
 
-        socket.on('data', this.handleReceivedPacket.bind(socket));
+        socket.on('data', this.PacketHandler.handleReceivedPacket.bind(socket));
     }
 
 }
