@@ -3,9 +3,9 @@ let PacketTypes = require('../util/PacketTypes');
 class PacketHandler extends PacketTypes
 {
 
-    constructor()
+    constructor(socket)
     {
-        super();
+        super(socket);
     }
 
     handleReceivedPacket(packet)

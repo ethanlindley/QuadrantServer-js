@@ -1,16 +1,22 @@
-let wss = require('ws');
+let net = require('net');
+let PacketHandler = require('./PacketHandler');
 
-class GameServer
+class GameServer extends PacketHandler
 {
     constructor(port)
     {
+        super(port);
+
         this.port = port;
     }
 
     startServer()
     {
-        let s = new wss.Server({ port: this.port }, this.onStart.bind(this));
-        s.on('connection', this.onConnection.bind(this));
+        let server = net.createServer();
+
+        server.listen(this.port, this.onStart());
+
+        server.on('connection', this.onConnection.bind(this));
     }
 
     onStart()
@@ -18,10 +24,11 @@ class GameServer
         console.log('INFO: GameServer starting on port ' + this.port);
     }
 
-    onConnection(ws)
+    onConnection(socket)
     {
-        let client = ws.remoteAddress;
-        console.log('INFO: new connection from ' + client);
+        console.log('INFO: new connection from ' + socket.remoteAddress);
+
+        socket.on('data', this.handleReceivedPacket.bind(socket));
     }
 
 }

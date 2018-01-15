@@ -5,7 +5,7 @@ class LoginServer extends PacketHandler
 {
     constructor(port)
     {
-        super();
+        super(port);
 
         this.port = port;
     }

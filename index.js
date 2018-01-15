@@ -5,7 +5,7 @@ let loginServer = new ls(6112);
 let gameServer = new gs(6113);
 
 loginServer.startServer();
-//gameServer.startServer();
+gameServer.startServer();
 
 process.on('uncaughtException',
     function(err)
