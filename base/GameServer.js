@@ -28,7 +28,7 @@ class GameServer
     {
         console.log('INFO: new connection from ' + socket.remoteAddress);
 
-        let x = socket.on('data', this.PacketHandler.handleReceivedPacket.bind(socket));
+        let x = socket.on('data', this.PacketHandler.handleReceivedPacket.bind(this));
         this.PacketHandler.sendPacket(x, socket);
     }
 }

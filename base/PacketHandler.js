@@ -27,20 +27,24 @@ class PacketHandler
 
     handleXMLPacket(packet)
     {
+        let data = packet;
+
         switch (packet)
         {
             case this.PacketTypes.policy_file_req:
-                this.sendPacket(this.PacketTypes.policy_file_res);
+                data = this.PacketTypes.policy_file_res;
                 break;
 
             case this.PacketTypes.api_verchk:
                 let x = this.checkVersion(packet);
-                this.sendPacket(x);
+                data = x;
                 break;
 
             default:
                 console.log('INFO: rogue packet received with data - ' + packet);
         }
+
+        return data;
     }
 
     handleRAWPacket(packet)
@@ -52,17 +56,18 @@ class PacketHandler
     {
         // TODO: don't hard set version
 
-        let __packet = packet;
+        let data = packet;
 
-        if (__packet.contains('153'))
+        if (data.contains('153'))
         {
-            __packet = this.PacketTypes.api_OK;
+            data = this.PacketTypes.api_OK;
         }
         else
         {
-            __packet = this.PacketTypes.api_KO;
+            data = this.PacketTypes.api_KO;
         }
-        return __packet;
+
+        return data;
     }
 
     sendPacket(packet, socket)
