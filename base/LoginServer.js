@@ -28,9 +28,9 @@ class LoginServer
     {
         console.log('INFO: new connection from ' + socket.remoteAddress);
 
-        socket.on('data', this.PacketHandler.handleReceivedPacket.bind(socket));
+        let x = socket.on('data', this.PacketHandler.handleReceivedPacket.bind(socket));
+        this.PacketHandler.sendPacket(x, socket);
     }
-
 }
 
 module.exports = LoginServer;

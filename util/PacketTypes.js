@@ -1,6 +1,5 @@
 class PacketTypes
 {
-
     constructor()
     {
         // let's define some of our packets
@@ -11,7 +10,6 @@ class PacketTypes
         this.api_OK = "";
         this.api_KO = "";
     }
-
 }
 
 module.exports = PacketTypes;

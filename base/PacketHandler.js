@@ -2,7 +2,6 @@ let PacketTypes = require('../util/PacketTypes');
 
 class PacketHandler
 {
-
     constructor()
     {
         this.PacketTypes = new PacketTypes();
@@ -10,19 +9,19 @@ class PacketHandler
 
     handleReceivedPacket(packet)
     {
-        let __packet = packet.toString();
+        let data = packet.toString();
 
-        if (__packet.charAt(0) === '<')
+        if (data.charAt(0) === '<')
         {
-            console.log('INFO: XML packet received with data - ' + __packet);
-            __packet = this.handleXMLPacket(__packet);
+            console.log('INFO: XML packet received with data - ' + data);
+            data = this.handleXMLPacket(data);
         }
-        else if (__packet.charAt(0) === '%')
+        else if (data.charAt(0) === '%')
         {
-            console.log('INFO: RAW packet received with data - ' + __packet);
-            __packet = this.handleRAWPacket(__packet);
+            console.log('INFO: RAW packet received with data - ' + data);
+            data = this.handleRAWPacket(data);
         }
-        return __packet;
+        return data;
     }
 
     handleXMLPacket(packet)
@@ -37,10 +36,10 @@ class PacketHandler
                 let x = this.checkVersion(packet);
                 this.sendPacket(x);
                 break;
+
             default:
                 console.log('INFO: rogue packet received with data - ' + packet);
         }
-        return packet;
     }
 
     handleRAWPacket(packet)
@@ -54,7 +53,7 @@ class PacketHandler
 
         let __packet = packet;
 
-        if (packet.contains('153'))
+        if (__packet.contains('153'))
         {
             __packet = this.PacketTypes.api_OK;
         }
@@ -65,11 +64,12 @@ class PacketHandler
         return __packet;
     }
 
-    sendPacket(packet)
+    sendPacket(packet, socket)
     {
-        // TODO: properly send received and handled packets back to the client
-    }
+        let x = packet.toString();
 
+        socket.write(x);
+    }
 }
 
 module.exports = PacketHandler;
