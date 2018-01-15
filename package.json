@@ -1,0 +1,25 @@
+{
+  "name": "quadrantserver",
+  "version": "1.0.0",
+  "description": "An attempt to emulate Club Penguin's server backend using NodeJS and WebSockets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethanlindley/QuadrantServer-js.git"
+  },
+  "keywords": [
+    "cpps"
+  ],
+  "author": "Ethan Lindley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ethanlindley/QuadrantServer-js/issues"
+  },
+  "homepage": "https://github.com/ethanlindley/QuadrantServer-js#readme",
+  "dependencies": {
+    "ws": "^4.0.0"
+  }
+}
