@@ -21,6 +21,7 @@ class PacketHandler
             console.log('INFO: RAW packet received with data - ' + data);
             data = this.handleRAWPacket(data);
         }
+
         return data;
     }
 
