@@ -1,4 +1,4 @@
-let WebSocket = require('ws');
+let net = require('net');
 let PacketHandler = require('./PacketHandler');
 
 class LoginServer extends PacketHandler
@@ -12,8 +12,11 @@ class LoginServer extends PacketHandler
 
     startServer()
     {
-        let wss = new WebSocket.Server({port: this.port}, this.onStart.bind(this));
-        wss.on('connection', this.onConnection.bind(this));
+        let server = net.createServer();
+
+        server.listen(this.port, this.onStart());
+
+        server.on('connection', this.onConnection.bind(this));
     }
 
     onStart()

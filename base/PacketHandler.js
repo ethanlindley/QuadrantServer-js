@@ -15,13 +15,14 @@ class PacketHandler extends PacketTypes
         if (__packet.charAt(0) === '<')
         {
             console.log('INFO: XML packet received with data - ' + __packet);
-            this.handleXMLPacket(__packet);
+            __packet = this.handleXMLPacket(__packet);
         }
         else if (__packet.charAt(0) === '%')
         {
             console.log('INFO: RAW packet received with data - ' + __packet);
-            this.handleRAWPacket(__packet);
+            __packet = this.handleRAWPacket(__packet);
         }
+        return __packet;
     }
 
     handleXMLPacket(packet)
@@ -37,6 +38,7 @@ class PacketHandler extends PacketTypes
                 this.sendPacket(x);
                 break;
         }
+        return packet;
     }
 
     handleRAWPacket(packet)
