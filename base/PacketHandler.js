@@ -50,7 +50,19 @@ class PacketHandler
 
     checkVersion(packet)
     {
-        // TODO: check client's version and compare with servers, determine whether client can play or not
+        // TODO: don't hard set version
+
+        let __packet = packet;
+
+        if (packet.contains('153'))
+        {
+            __packet = this.PacketTypes.api_OK;
+        }
+        else
+        {
+            __packet = this.PacketTypes.api_KO;
+        }
+        return __packet;
     }
 
     sendPacket(packet)
