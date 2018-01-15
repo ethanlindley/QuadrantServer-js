@@ -14,7 +14,6 @@ class LoginServer extends PacketHandler
     {
         let wss = new WebSocket.Server({port: this.port}, this.onStart.bind(this));
         wss.on('connection', this.onConnection.bind(this));
-        wss.on('data', this.handleReceivedPacket.bind(this));
     }
 
     onStart()
@@ -25,6 +24,8 @@ class LoginServer extends PacketHandler
     onConnection(socket)
     {
         console.log('INFO: new connection from ' + socket.remoteAddress);
+
+        socket.on('data', this.handleReceivedPacket.bind(socket));
     }
 
 }
