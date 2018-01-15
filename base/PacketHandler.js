@@ -37,6 +37,8 @@ class PacketHandler extends PacketTypes
                 let x = this.checkVersion(packet);
                 this.sendPacket(x);
                 break;
+            default:
+                console.log('INFO: rogue packet received with data - ' + packet);
         }
         return packet;
     }
